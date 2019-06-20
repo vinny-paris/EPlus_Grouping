@@ -1,0 +1,5 @@
+June_20th_morning
+
+Grouping is done and building the factorial experiment is also done in the sense the code is written and working. Documentation will be done soon. The remaining points that need to be taken care of is getting it cleaned up such that all the background functions are united ito one easy to run file and then to construct the design matrices for the XSEDE dropbox replacement files.
+
+After that is finished I will build an image of this package which takes in the output produced by EnergyPlus, estimates the betas, applies Lenth's method, and breaks down the groups further into new design matrixes to be ran again. Basically the iterative part of the iterative grouping experiment
