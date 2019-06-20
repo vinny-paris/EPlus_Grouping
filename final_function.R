@@ -8,7 +8,7 @@ create_grouping_exp <- function(file, num_of_groups = 10){
   exp_data <- make_groups(file, group_size = num_of_groups) 
   design_matrix <- make_design(exp_data)
   final <- list(exp_data, design_matrix)
-  names(final) <- c("param_data", "desgin_matrix")
+  names(final) <- c("param_data", "design_matrix")
   return(final)
 }
   
