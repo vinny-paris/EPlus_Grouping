@@ -36,7 +36,7 @@ diags <- data.frame(1:110, 1:110, 15)
 names(diags) <- c("i"   ,        "j"       ,    "corr_points")
 
 ook <- rbind(lcook, diags)
-L <- dcast(ook, i ~ j)[,-1]
+L <- suppressWarnings(dcast(ook, i ~ j)[,-1])
 L[is.na(L)] <- 0
 L <- L + t(L) + .001
 m <- 1/L
