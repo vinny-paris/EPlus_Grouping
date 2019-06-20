@@ -1,11 +1,11 @@
 # EPlus_Grouping
-This package will layout a scheme to efficiently group variables in the EnergyPlus model idf files to allow for variable selection process to occur
+This package will layout a scheme to efficiently group variables in the EnergyPlus model idf files to allow for variable selection process to occur.
+
+The main function is in the R file "final_fucntion.R". It needs to be given the name (and location if not in the current working directory) of the parameter information file that Joshua New gave me and the number of groups wanted. It will return a list of 1) a slightly larger information set than the orgiinal file including group assignment and 20th and 80th percentiles and 2) a design matrix to be used to build the IDF files
 
 
-Right there are two files containing functions that need to be read in. The first is "word_cors" which is used to break down how tightly to variable names are connected. It splits the strings along puncuations and spaces according to regular expressions and then finds the proportion of shared "words" between pairs of names. One function is for vectors and the other is applied to entire dataframes.
+There are three "background" R files that need to be ran before the main R file. "metric" is just a grab bag of small functions. "make_design" will actually create the factorial design of appropriate size with the 20th and 80th percentile of the parameter's range being used as 0/1 respectively. "make_groups" assigns the groups to each variable based on name overlapping and parameter values using an agglometartive clustering algorithm.
 
-The second function file is metric which takes in the original description file (not the building IDF but the pre generated information about the parameters of interest) and manipulates them along different lines to find similarities (mathcing 80th percentiles, same group, same field, etc....). It also folds in teh word_cors functions for it's use. 
+The example file just runs there a small example of what everything looks like using the data file in the "example data" folder (Large_Hospital_New2004.csv). 
 
-The example file just runs there a small example of what everything looks like using the data file here in the project (Large_Hospital_New2004.csv). 
-
-The old_code file is previous work that I will canabalize after getting the groups organized properly. The code was written before I realized exactly where/how the files were organized, which was prior to the last meeting with Joshua New.
+The outdate folder is just a random smattering of old code that can be ignored or even deleted (I'm afraid I'll delete something I need)
