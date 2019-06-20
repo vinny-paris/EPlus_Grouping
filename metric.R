@@ -42,8 +42,8 @@ points <- function(data){
 
 #Cuts down the above output into just the two indices (i, j) and 
 #and the corresponding closeness metric
-grouper <- function(data){
-  new <- data[which(data[,8] >= 3), c(1,2,8)]
+grouper <- function(data, strength = 6){
+  new <- data[which(data[,8] >= strength), c(1,2,8)]
 }
 
 
