@@ -62,8 +62,18 @@ assign_groups <- function(data, groups){
 }
 
 
+smalls_calc <- function(x, low_group_size = 20){
+    t <- table(x$group) < 20
+    smalls <- as.numeric(names(t)[t])
+    return(smalls)
+}
+    
 
 
+group_little <- function(x, smalls){
+  if(sum(x[4] %in% smalls) == 1){x[4] <- smalls[1]}
+  return(x)
+}
 
 
 
