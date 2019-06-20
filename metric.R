@@ -40,54 +40,30 @@ points <- function(data){
 }
 
 
-#Cuts down the above output into just the two indices (i, j) and 
-#and the corresponding closeness metric
-grouper <- function(data, strength = 6){
-  new <- data[which(data[,8] >= strength), c(1,2,8)]
+
+
+#builds a full factorial design based on how many variables you
+#passing to it (for us that is the number of groups)
+balloon <- function(x) { 
+  
+  u <- unlist(base::strsplit(R.utils::intToBin(0:(2^x - 1)),
+                             split = ""))
+  
+  v <- matrix(u, byrow = TRUE, ncol = x)
+  
+  return(v)
 }
 
 
 
 
 
-
-
-assign_groups <- function(data, groups){
-  j <- groups$j
-  i <- groups$i
-  mx <- length(unique(i))
-  data[, 14:(13+mx)] <- 0
-  data[j, 13 + i] <- i
-  return(data)
+#finds the proportion of overlap between names of variables
+word_cor <- function(j){
+  x <- unlist(strsplit(as.character(j[1]), split = "[[:punct:][:space:]]+"))
+  y <- unlist(strsplit(as.character(j[2]), split = "[[:punct:][:space:]]+"))
+  sum(chmatch(x, y, nomatch = 0) != 0)/max(length(x), length(y))
 }
-
-
-smalls_calc <- function(x, low_group_size = 20){
-    t <- table(x$group) < 20
-    smalls <- as.numeric(names(t)[t])
-    return(smalls)
-}
-    
-
-
-group_little <- function(x, smalls){
-  if(sum(x[4] %in% smalls) == 1){x[4] <- smalls[1]}
-  return(x)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
