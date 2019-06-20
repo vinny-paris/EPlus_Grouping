@@ -8,4 +8,4 @@ The second function file is metric which takes in the original description file 
 
 The example file just runs there a small example of what everything looks like using the data file here in the project (Large_Hospital_New2004.csv). 
 
-The old_code file is previous work that I will canabalize after getting the groups organized properly
+The old_code file is previous work that I will canabalize after getting the groups organized properly. The code was written before I realized exactly where/how the files were organized, which was prior to the last meeting with Joshua New.
