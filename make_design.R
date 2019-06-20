@@ -15,8 +15,8 @@ make_design <- function(data_summary){
   exp_01      <- apply(exp_01_char, 1:2, as.numeric)
 
   #transform the 0/1's to p20/p80's
-  exp_0big <- sweep(exp_01, 2, data$p80, "*")
-  exp_lit1 <- sweep(abs(exp_01 - 1), 2, data$p20, "*")
+  exp_0big <- sweep(exp_01, 2, data_summary$p80, "*")
+  exp_lit1 <- sweep(abs(exp_01 - 1), 2, data_summary$p20, "*")
   exp_correct <- exp_0big + exp_lit1
   
   #name the cols
