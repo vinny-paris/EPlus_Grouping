@@ -1,5 +1,6 @@
 #Testing data
 library(data.table)
+library(cluster)
 
 #read in the example file and denote the 20th and 80th percentiles
 fil <- read.csv('Large_Hospital_New2004.csv', header = TRUE)
@@ -29,9 +30,30 @@ colnames(cooky)[8] <- 'corr_points'
 cooky <- data.frame(cooky)
 head(cooky)
 
+lcook <- cooky[,c(1,2,8)]
 
-#Cuts down the above matrix into just the two indices (i, j) and 
-#and the corresponding closeness metric
-cooker <- grouper(cooky)
-head(cooker)
+diags <- data.frame(1:110, 1:110, 15)
+names(diags) <- c("i"   ,        "j"       ,    "corr_points")
+
+ook <- rbind(lcook, diags)
+L <- dcast(ook, i ~ j)[,-1]
+L[is.na(L)] <- 0
+L <- L + t(L) + .001
+m <- 1/L
+
+
+agnes(m, diss = TRUE) -> hope
+heep <- as.dendrogram(hope)
+sub_grp <- cutree(as.hclust(heep), 10)
+fviz_cluster(list(data = m, cluster = sub_grp))
+
+fil$Group <- sub_grp
+
+head(fil)
+
+
+
+
+
+
 
