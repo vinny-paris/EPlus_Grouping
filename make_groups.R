@@ -1,7 +1,13 @@
-make_groups <- function(file, group_size = 10){
+make_groups <- function(file = NULL, group_size = 10, data = NULL){
+  
+  if(length(data) == 0 & length(file) == 0) {stop("Please pass a file or
+  a dataframe to this function")}
   
 #read in the file
+  if(length(data) == 0){
   fil     <-  read.csv(file, header = TRUE)
+  } else {fil <- data}
+  
   rs      <- dim(fil)[1]
 #attach 20th and 80th percentiles
   fil$p20 <-  (fil$Maximum - fil$Minimum)*.2 + fil$Minimum 
@@ -42,7 +48,7 @@ make_groups <- function(file, group_size = 10){
 #create groups and attach to the original data frame
   agnes(m, diss = TRUE) -> hope
   heep <- as.dendrogram(hope)
-  sub_grp <- cutree(as.hclust(heep), k = group_size)
+  sub_grp <- cutree(as.hclust(heep), k = min(dim(data)[1], group_size))
   fil$Group <- sub_grp
   
 #done
