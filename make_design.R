@@ -20,7 +20,7 @@ make_design <- function(data_summary){
   exp_correct <- exp_0big + exp_lit1
   
   #name the cols
-  namey <- apply(data_summary[,2:4], 1, paste, collapse = "-")
+  namey <- apply(data_summary[,2:4], 1, paste, collapse = ",")
   colnames(exp_correct) <- namey
   
   return(exp_correct)
